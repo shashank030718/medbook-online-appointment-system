@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook Admin
+        </div>
+
+        <div class="nav-links">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>Welcome, {{ name }} 👋</h1>
+
+        <p class="subtitle">
+            Manage MedBook doctors and appointments.
+        </p>
+
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+
+                <h2>Manage Doctors</h2>
+
+                <p>
+                    Add, edit, or remove doctors from the system.
+                </p>
+
+                <a href="/admin/doctors" class="button">
+                    Manage Doctors
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>Manage Appointments</h2>
+
+                <p>
+                    View and manage patient appointments.
+                </p>
+
+                <a href="/admin/appointments" class="button">
+                    View Appointments
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>Reports</h2>
+
+                <p>
+                    View system reports and appointment statistics.
+                </p>
+
+                <a href="/admin/reports" class="button">
+                    View Reports
+                </a>
+                
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

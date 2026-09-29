@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Reports</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook Admin
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/admin/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/admin/doctors">
+                Manage Doctors
+            </a>
+
+            <a href="/admin/appointments">
+                Manage Appointments
+            </a>
+
+            <a href="/admin/reports">
+                Reports
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>Reports Dashboard</h1>
+
+        <p class="subtitle">
+            Overview of MedBook system activity.
+        </p>
+
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+                <h2>{{ total_patients }}</h2>
+                <p>Total Patients</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ total_doctors }}</h2>
+                <p>Total Doctors</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ total_appointments }}</h2>
+                <p>Total Appointments</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ pending }}</h2>
+                <p>Pending</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ confirmed }}</h2>
+                <p>Confirmed</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ completed }}</h2>
+                <p>Completed</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ cancelled }}</h2>
+                <p>Cancelled</p>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

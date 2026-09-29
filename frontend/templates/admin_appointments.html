@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Manage Appointments</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook Admin
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/admin/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/admin/doctors">
+                Manage Doctors
+            </a>
+
+            <a href="/admin/appointments">
+                Manage Appointments
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="dashboard">
+
+        <h1>Manage Appointments</h1>
+
+        <p class="subtitle">
+            View and manage all patient appointments.
+        </p>
+
+
+        {% if appointments %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Specialization</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for appointment in appointments %}
+
+                <tr>
+
+                    <td>
+                        {{ appointment.appointment_id }}
+                    </td>
+
+                    <td>
+                        {{ appointment.patient_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.doctor_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.specialization }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_time }}
+                    </td>
+
+                    <td>
+                        {{ appointment.reason }}
+                    </td>
+
+                    <td>
+                        {{ appointment.status }}
+                    </td>
+                    <td>
+
+    <form
+        action="/admin/update-appointment/{{ appointment.appointment_id }}"
+        method="POST"
+    >
+
+        <select name="status">
+
+            <option
+                value="Pending"
+                {% if appointment.status == "Pending" %}
+                selected
+                {% endif %}
+            >
+                Pending
+            </option>
+
+            <option
+                value="Confirmed"
+                {% if appointment.status == "Confirmed" %}
+                selected
+                {% endif %}
+            >
+                Confirmed
+            </option>
+
+            <option
+                value="Completed"
+                {% if appointment.status == "Completed" %}
+                selected
+                {% endif %}
+            >
+                Completed
+            </option>
+
+            <option
+                value="Cancelled"
+                {% if appointment.status == "Cancelled" %}
+                selected
+                {% endif %}
+            >
+                Cancelled
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Update
+        </button>
+
+    </form>
+
+</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>
+            No appointments have been booked yet.
+        </p>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

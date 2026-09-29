@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Book Appointment</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/patient/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <div class="container">
+
+            <h1>Book Appointment</h1>
+
+            <form method="POST">
+
+                <label for="doctor_id">
+                    Select Doctor
+                </label>
+
+                <select
+                    id="doctor_id"
+                    name="doctor_id"
+                    required
+                >
+
+                    <option value="">
+                        -- Select a Doctor --
+                    </option>
+
+                    {% for doctor in doctors %}
+
+                    <option value="{{ doctor.doctor_id }}">
+
+                        {{ doctor.name }}
+                        - {{ doctor.specialization }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <label for="appointment_date">
+                    Appointment Date
+                </label>
+
+                <input
+                    type="date"
+                    id="appointment_date"
+                    name="appointment_date"
+                    required
+                >
+
+
+                <label for="appointment_time">
+                    Appointment Time
+                </label>
+
+                <input
+                    type="time"
+                    id="appointment_time"
+                    name="appointment_time"
+                    required
+                >
+
+
+                <label for="reason">
+                    Reason for Visit
+                </label>
+
+                <textarea
+                    id="reason"
+                    name="reason"
+                    placeholder="Describe your reason for appointment"
+                ></textarea>
+
+
+                <button type="submit">
+                    Book Appointment
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Edit Doctor</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook Admin
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/admin/dashboard">Dashboard</a>
+
+            <a href="/admin/doctors">
+                Manage Doctors
+            </a>
+
+            <a href="/logout">Logout</a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <div class="container">
+
+            <h1>Edit Doctor</h1>
+
+            <form method="POST">
+
+                <label for="name">
+                    Doctor Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ doctor.name }}"
+                    required
+                >
+
+
+                <label for="specialization">
+                    Specialization
+                </label>
+
+                <input
+                    type="text"
+                    id="specialization"
+                    name="specialization"
+                    value="{{ doctor.specialization }}"
+                    required
+                >
+
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ doctor.email }}"
+                    required
+                >
+
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value="{{ doctor.phone or '' }}"
+                >
+
+
+                <button type="submit">
+                    Update Doctor
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

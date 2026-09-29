@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Doctor Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook Doctor
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/doctor/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctor/appointments">
+                My Appointments
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>
+            Welcome, Dr. {{ name }} 👋
+        </h1>
+
+        <p class="subtitle">
+            Manage your patient appointments.
+        </p>
+
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+
+                <h2>My Appointments</h2>
+
+                <p>
+                    View and manage your scheduled appointments.
+                </p>
+
+                <a
+                    href="/doctor/appointments"
+                    class="button"
+                >
+                    View Appointments
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

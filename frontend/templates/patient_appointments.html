@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - My Appointments</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/patient/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/patient/book-appointment">
+                Book Appointment
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>My Appointments</h1>
+
+        <p class="subtitle">
+            View your appointment history and current bookings.
+        </p>
+
+
+        {% if appointments %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Doctor</th>
+                    <th>Specialization</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for appointment in appointments %}
+
+                <tr>
+
+                    <td>
+                        {{ appointment.appointment_id }}
+                    </td>
+
+                    <td>
+                        {{ appointment.doctor_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.specialization }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_time }}
+                    </td>
+
+                    <td>
+                        {{ appointment.reason }}
+                    </td>
+
+                    <td>
+                        {{ appointment.status }}
+                    </td>
+                    <td>
+
+    {% if appointment.status == "Pending"
+          or appointment.status == "Confirmed" %}
+
+    <form
+        action="/patient/cancel-appointment/{{ appointment.appointment_id }}"
+        method="POST"
+        style="display: inline;"
+    >
+
+        <button
+            type="submit"
+            onclick="return confirm('Are you sure you want to cancel this appointment?')"
+        >
+            Cancel
+        </button>
+
+    </form>
+
+    {% else %}
+
+    -
+
+    {% endif %}
+
+</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>
+            You have no appointments yet.
+        </p>
+
+        <a href="/patient/book-appointment"
+           class="button">
+            Book Your First Appointment
+        </a>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

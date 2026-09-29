@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - My Appointments</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook Doctor
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/doctor/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/doctor/appointments">
+                My Appointments
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>My Appointments</h1>
+
+        <p class="subtitle">
+            View your scheduled patient appointments.
+        </p>
+
+
+        {% if appointments %}
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Patient Name</th>
+                    <th>Patient Email</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                {% for appointment in appointments %}
+
+                <tr>
+
+                    <td>
+                        {{ appointment.appointment_id }}
+                    </td>
+
+                    <td>
+                        {{ appointment.patient_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.patient_email }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_time }}
+                    </td>
+
+                    <td>
+                        {{ appointment.reason }}
+                    </td>
+
+                    <td>
+    {{ appointment.status }}
+</td>
+
+<td>
+
+    <form
+        action="/doctor/update-appointment/{{ appointment.appointment_id }}"
+        method="POST"
+    >
+
+        <select name="status">
+
+            <option
+                value="Pending"
+                {% if appointment.status == "Pending" %}
+                selected
+                {% endif %}
+            >
+                Pending
+            </option>
+
+            <option
+                value="Confirmed"
+                {% if appointment.status == "Confirmed" %}
+                selected
+                {% endif %}
+            >
+                Confirmed
+            </option>
+
+            <option
+                value="Completed"
+                {% if appointment.status == "Completed" %}
+                selected
+                {% endif %}
+            >
+                Completed
+            </option>
+
+            <option
+                value="Cancelled"
+                {% if appointment.status == "Cancelled" %}
+                selected
+                {% endif %}
+            >
+                Cancelled
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Update
+        </button>
+
+    </form>
+
+</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p>
+            You currently have no appointments.
+        </p>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

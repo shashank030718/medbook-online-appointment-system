@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MedBook - Patient Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            MedBook
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/patient/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <h1>
+            Welcome, {{ name }} 👋
+        </h1>
+
+        <p class="subtitle">
+            Manage your medical appointments easily.
+        </p>
+
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+
+                <h2>Book Appointment</h2>
+
+                <p>
+                    Find a doctor and book your appointment.
+                </p>
+
+                <a href="/patient/book-appointment"
+                   class="button">
+                    Book Now
+                </a>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>Appointment History</h2>
+
+                <p>
+                    View your previous and upcoming appointments.
+                </p>
+
+                <a href="/patient/appointments"
+                   class="button">
+                    View Appointments
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
