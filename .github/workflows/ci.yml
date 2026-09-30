@@ -44,8 +44,7 @@ jobs:
           role-to-assume: arn:aws:iam::621788589162:role/GitHubActions-MedBook-ECR
           aws-region: ap-south-1
 
-      - name: Debug OIDC claims
-        uses: github/actions-oidc-debugger@main
+      
 
       - name: Login to Amazon ECR
         if: github.event_name == 'push'
