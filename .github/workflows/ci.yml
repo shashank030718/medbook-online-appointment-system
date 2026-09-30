@@ -1,4 +1,4 @@
-name: MedBook CI
+name: MedBook CI/CD
 
 on:
   push:
@@ -8,8 +8,12 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,3 +33,37 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t medbook-flask:test .
+
+      - name: Configure AWS credentials
+        if: github.event_name == 'push'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::621788589162:role/GitHubActions-MedBook-ECR
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        if: github.event_name == 'push'
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Tag Docker image
+        if: github.event_name == 'push'
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: medbook
+        run: |
+          docker tag medbook-flask:test $REGISTRY/$REPOSITORY:latest
+          docker tag medbook-flask:test $REGISTRY/$REPOSITORY:${{ github.sha }}
+
+      - name: Push Docker image to ECR
+        if: github.event_name == 'push'
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: medbook
+        run: |
+          docker push $REGISTRY/$REPOSITORY:latest
+          docker push $REGISTRY/$REPOSITORY:${{ github.sha }}
+
+
+
+          
